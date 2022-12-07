@@ -14,6 +14,13 @@ const app = Vue.createApp({
             languageTrimmed:"",
             show: false,
             workTrimmed: "",
+            listName: "",
+            addToListProps: {
+                listID: "",
+                ISBN: ""
+            }
+            
+
             }
 
         },
@@ -52,6 +59,55 @@ const app = Vue.createApp({
                         console.log(error);
                     })
             },
+
+            GetBookLists(){
+                const Listsource = `https://openlibrary.azurewebsites.net/api/book`   
+                
+                axios.get(Listsource)
+
+
+
+            
+                    .then( response =>{
+                       this.ListName = response.data;
+                       console.log(response);
+                       console.log(this.ListName);
+                       var listLength = this.ListName.length
+                       for (var i = 0; i<listLength; i++){
+
+                        console.log(this.ListName[i].list_Name);
+                       }
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    })
+
+            },
+
+            AddBookToList(){
+                const Listsource = `https://openlibrary.azurewebsites.net/api/book`   
+                
+
+                axios.post(`https://openlibrary.azurewebsites.net/api/book`, {
+                    List_Name: this.addToListProps.listID,
+                    isbn: this.addToListProps.ISBN
+                })
+
+                .then((response) => {
+                    this.isbn = response.data;
+                    console.log(response);
+                    console.log(this.isbn)
+                })
+
+                .catch(function (error){
+                    console.log(error);
+                })
+
+                
+            },
+
+                
+
             //Får fat i forfatterens navn ved at lave et nyt API kald med forfatter id for at få fat i navnet.
             GetAuthorName(){
                 const AutherSource = `https://openlibrary.org/authors/${this.authorTrimmed}.json`
@@ -64,6 +120,7 @@ const app = Vue.createApp({
                     console.log(error);
                 })
             },
+
             GetWorkById(){
                 const WorkSource = `https://openlibrary.org/works/${this.workTrimmed}.json`
                 axios.get(WorkSource)
@@ -74,6 +131,7 @@ const app = Vue.createApp({
                     console.log(error);
                 })
             },
+
             //Gør voes oversigt i view delen er usynlig indtil der klikkes på knappen 
             TurnTrue(){
                 this.show=true

@@ -11,38 +11,70 @@
 
 <body>
     <div id="app">
+
+        
+    <div>
+        <button class="btn btn-dark" type="button " @click="GetBookLists()"> TEST </button>
+        <p> {{ ListName }}</p>
+    </div>    
+        
          
     <div style="position:relativ;">
         <input id="inputField" type="text" v-model="isbn" @keyup.enter="GetBookByIsbn(); TurnTrue()">
-        <button class="btn btn-dark" type="button" @click="GetBookByIsbn(); TurnTrue()">søg</button>
-    </div>    
+        <button class="btn btn-success" style="position:relative; left: 15px" type="button" @click="GetBookByIsbn(); TurnTrue()">søg</button>
+    </div> 
+
     <div v-show="show">
         
         <div class="row" style="position:relative; left: 80px; top:10px; background-color:bisque">
             Titles: {{ title }}
         </div>
+
         <div class="row" style="position:relative; left: 80px; top:20px; background-color:bisque">
             Author: {{ personalAuthorName }}
         </div>
+
         <div class="row" style="position:relative; left: 80px; top:30px; background-color:bisque">
             Number of pages: {{ numberOfPages }}
         </div>
-        <div></div>
+        
         <div class="row" style="position:relative; left: 80px; top:40px; background-color:bisque">
             Genre: 
+
             <li v-for="(value) in subjects">
                 {{ value }}
-            </li>
-           
+            </li>   
+
         </div>
+
         <div class="row" style="position:relative; left: 80px; top:50px; background-color:bisque">
             Language(s): {{ languageTrimmed }}
         </div>
+
         <div class="row" style="position:relative; left: 80px; top:60px; background-color:bisque">
             Publis Date: {{ publishDate }}
-        </div>
-    </div>    
+        </div> 
+         
+        <form class="row" style="position:relative; left: 80px; top:80px;">
+            <input type="hidden" Name="ID" id="hisddenfield">
+            <input type="text" class="form" v-model="addToListProps.listID" id="form-input-is-List_ID" placeholder="List_ID">
+            <input type="text" class="form" v-model="addToListProps.ISBN" id="form-input-is-isbn" placeholder="isbn">
+        </form>        
+            
+        
+
+        <form class="row" style="position:relative; left: 80px; top:100px;">
+        <button class="btn btn-success" data-info="Data from button" @click="AddBookToList()" onclick="populate(this);">Tilføj til liste</button>
+        </form>
+
+        <form class="row" style="position:relative; left: 80px; top:120px;">
+        <button class="btn btn-success" type="button " @click="CreateNewList()"> Lav ny liste </button>
+        </form>    
+    </div>   
+    
+     
 </div>
+
 
 <script src="./index.js"></script>
 <script>app.mount("#app");</script>

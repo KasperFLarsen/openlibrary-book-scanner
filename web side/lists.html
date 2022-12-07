@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        
+        <div >
+        
+            <div v-for="book in list" class="row" style="position:relative; left: 80px; top:10px; background-color:bisque">
+                Titles: {{ book.isbn }} Author: {{ personalAuthorName }}
+            </div>
+                
+    </div>   
+</div>
+
+
+<script src="./lists.js"></script>
+<script>app.mount("#app");</script>
+</body>
+
+</html>
